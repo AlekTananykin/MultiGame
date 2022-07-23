@@ -30,6 +30,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
 
+    private void Disconnect()
+    {
+        if (!PhotonNetwork.IsConnected)
+            return;
+
+        
+    }
+
     public override void OnConnectedToMaster()
     {
         Debug.Log("OnConnectedToMaster was called by PUN");

@@ -1,9 +1,12 @@
 using PlayFab;
 using PlayFab.ClientModels;
+using System;
 using UnityEngine;
 
 public class PlayFabLogin : MonoBehaviour
 {
+    public Action<string, bool> OnLogin;
+
     void Start()
     {
         if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
@@ -21,12 +24,14 @@ public class PlayFabLogin : MonoBehaviour
     private void OnLoginFailure(PlayFabError error)
     {
         var errorMessage = error.GenerateErrorReport();
-
-        Debug.Log($"Error: {errorMessage}");
+        string msg = $"Error: {errorMessage}";
+        Debug.Log(msg);
+        OnLogin(msg, false);
     }
 
     private void OnLoginSuccess(LoginResult obj)
     {
         Debug.Log("Login Success");
+        OnLogin("Login Success", true);
     }
 }
