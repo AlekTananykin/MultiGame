@@ -1,21 +1,17 @@
 using Photon.Pun;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Realtime;
 using UnityEngine;
 
-public class Launcher : MonoBehaviour
+public class Launcher : MonoBehaviourPunCallbacks
 {
 
     private string gameVersion = "1";
-
 
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         Connect();
@@ -34,4 +30,8 @@ public class Launcher : MonoBehaviour
         }
     }
 
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("OnConnectedToMaster was called by PUN");
+    }
 }
